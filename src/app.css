@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+#quiz_title {
+  text-align: center;
+}
+.answer-input {
+  margin-right: 10px;
+}
+.statement-container {
+  margin-bottom: 10px;
+}
+.statement-label {
+  font-size: 14px;
+  font-weight: 100;
+}

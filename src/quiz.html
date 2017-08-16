@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Javascript Quiz</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body>
+
+    <div id="app" class="container">
+      <h1 id="quiz_title">Javascript Quiz</h1>
+      <template v-for="question in questions">
+        <h3>{{ question.question }}</h3>
+        <div class="statement-container" v-for="option in question.options">
+          <label class="statement-label" :for="option.id">
+            <input class="answer-input" type="checkbox" :name="option.id"/>
+            {{ option.statement }}
+          </label>
+        </div>
+      </template>
+    </div>
+
+    <script src="https://unpkg.com/vue"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
