@@ -10,14 +10,21 @@
 
     <div id="app" class="container">
       <h1 id="quiz_title">Javascript Quiz</h1>
-      <template v-for="question in questions">
+      <template v-for="(question, index) in questionsList">
         <h3>{{ question.question }}</h3>
+        <div v-if="question.codeSnippet" class="code-review">
+          <p v-for="code in question.codeSnippet">{{ code }}</p>
+        </div>
         <div class="statement-container" v-for="option in question.options">
           <label class="statement-label" :for="option.id">
             <input class="answer-input" type="checkbox" :name="option.id"/>
             {{ option.statement }}
           </label>
         </div>
+        <button @click="nextQuestion" class="btn btn-primary">{{ buttonText }}</button>
+      </template >
+      <template v-if="submitted">
+        THIS IS THE QUIZ SCORE
       </template>
     </div>
 
