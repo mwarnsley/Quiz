@@ -91,9 +91,20 @@ export default StyleSheet.create({
     },
     "btnquiz-btntry-again": {
         "background": "#FFF",
-        "color": "#0099CC"
+        "color": "#0099CC",
+        "marginRight": 15
+    },
+    "btnquiz-btnview-wrong": {
+        "background": "#FFF",
+        "color": "#0099CC",
+        "marginRight": 15
     },
     "btnquiz-btntry-again:hover": {
+        "background": "#00688B",
+        "color": "#FFF",
+        "cursor": "pointer"
+    },
+    "btnquiz-btnview-wrong:hover": {
         "background": "#00688B",
         "color": "#FFF",
         "cursor": "pointer"
@@ -104,7 +115,7 @@ export default StyleSheet.create({
         "color": "#FFF",
         "marginTop": 30,
         "marginRight": "auto",
-        "marginBottom": 0,
+        "marginBottom": 30,
         "marginLeft": "auto",
         "paddingTop": 15,
         "paddingRight": 15,
@@ -121,6 +132,7 @@ export default StyleSheet.create({
         "fontSize": 30,
         "fontWeight": "100"
     },
+    "incorrect-row": {},
     "right-answers": {
         "fontSize": 22,
         "fontWeight": "100"

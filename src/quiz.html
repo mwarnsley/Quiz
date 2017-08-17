@@ -10,7 +10,7 @@
 
     <div id="app" class="container">
       <h1 id="quiz_title">Javascript Quiz</h1>
-      <template v-for="(question, index) in questionsList">
+      <template v-for="question in questionsList">
         <p class="question">{{question.id}}. {{ question.question }}</p>
         <div v-if="question.codeSnippet" class="code-review">
           <p v-for="code in question.codeSnippet">{{ code }}</p>
@@ -52,7 +52,13 @@
             </p>
           </div>
           <div class="col-12">
+            <button v-if="viewIncorrectBtn" class="btn quiz-btn view-wrong" @click="showIncorrect">View Incorrect</button>
             <button class="btn quiz-btn try-again" @click="tryAgain">Try Again</button>
+          </div>
+        </div>
+        <div v-if="viewIncorrect" class="row incorrect-row alert alert-danger" v-for="incorrect in incorrectAnswers">
+          <div class="col-12">
+            <p class="incorrect">{{ incorrect.id }}. {{ incorrect.question }}</p>
           </div>
         </div>
       </template>

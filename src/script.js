@@ -10,7 +10,7 @@ var questions = [
       },
       {
         "id": "2",
-        "statement": "A widely-used open source general-purpose scripting language that is especially suited for web development and can be embedded into HTML."
+        "statement": "A widely-used open source general-purpose scripting language self is especially suited for web development and can be embedded into HTML."
       },
       {
         "id": "3",
@@ -18,7 +18,7 @@ var questions = [
       },
       {
         "id": "4",
-        "statement": "An object-oriented programming language from Microsoft that aims to combine the computing power of C++ with the programming ease of Visual Basic."
+        "statement": "An object-oriented programming language from Microsoft self aims to combine the computing power of C++ with the programming ease of Visual Basic."
       }
     ],
     "answer": "3"
@@ -90,8 +90,11 @@ new Vue({
     endQuiz: questions.length,
     submitted: false,
     error: false,
+    viewIncorrect: false,
+    viewIncorrectBtn: false,
     currentAnswer: '',
     correctAnswers: [],
+    incorrectAnswers: [],
     quizScore: '',
     rightAnswers: '',
     wrongAnswers: '',
@@ -99,52 +102,65 @@ new Vue({
   computed: {
     questionsList: function() {
       // Make sure we don't lose scope of the THIS keyword
-      var that = this;
-      return that.questions.filter(function(question, index) {
-        return Number(question.id) === that.currentQuestion;
+      var self = this;
+      return self.questions.filter(function(question, index) {
+        return Number(question.id) === self.currentQuestion;
       });
     }
   },
   methods: {
     nextQuestion: function() {
       // Make sure we don't lose scope of the THIS keyword
-      var that = this;
-      var currentQuestion = that.questions.find(function(question) {
-        return Number(question.id) === that.currentQuestion;
+      var self = this;
+      var currentQuestion = self.questions.find(function(question) {
+        return Number(question.id) === self.currentQuestion;
       });
       // Check and see if there is a currentAnswer selected. If not we need to not proceed
-      if (!that.currentAnswer) {
-        that.error = true;
+      if (!self.currentAnswer) {
+        self.error = true;
         return;
       }
       // Set the errors back to false if there has been an answer selected
-      that.error = false;
+      self.error = false;
       // Check to see if the answer selected matches the correct answer and if so push it onto the correctAnswers array
-      if (Number(currentQuestion.answer) === Number(that.currentAnswer)) {
-        that.correctAnswers.push(currentQuestion);
+      if (Number(currentQuestion.answer) === Number(self.currentAnswer)) {
+        self.correctAnswers.push(currentQuestion);
+      } else {
+        self.incorrectAnswers.push(currentQuestion);
       }
-      that.currentQuestion += 1;
+      self.currentQuestion += 1;
       // If we get to the last question instead of Next Question we have Submit Quiz
-      if (that.currentQuestion === that.endQuiz) {
-        that.buttonText = 'Submit Quiz';
-      } else if (that.currentQuestion - 1 === that.endQuiz) {
-        that.submitted = true;
-        that.quizScore = ((that.correctAnswers.length / that.questions.length) * 100).toFixed(2);
-        that.rightAnswers = that.correctAnswers.length;
-        that.wrongAnswers = (that.questions.length - that.correctAnswers.length);
+      if (self.currentQuestion === self.endQuiz) {
+        self.buttonText = 'Submit Quiz';
+      } else if (self.currentQuestion - 1 === self.endQuiz) {
+        self.submitted = true;
+        self.quizScore = ((self.correctAnswers.length / self.questions.length) * 100).toFixed(2);
+        self.rightAnswers = self.correctAnswers.length;
+        self.wrongAnswers = (self.questions.length - self.correctAnswers.length);
+        if (self.incorrectAnswers.length > 0) {
+          self.viewIncorrectBtn = true;
+        }
       }
     },
     tryAgain() {
+      // We need to keep the scope of the THIS keyword
+      var self = this;
       // We need to reset all of the data back to normal to start over again
-      var that = this;
-      that.currentQuestion = 1;
-      that.buttonText = 'Next Question';
-      that.submitted = false;
-      that.currentAnswer = '';
-      that.correctAnswers = [];
-      that.quizScore = '';
-      that.rightAnswers = '';
-      that.wrongAnswers = '';
+      self.currentQuestion = 1;
+      self.buttonText = 'Next Question';
+      self.submitted = false;
+      self.viewIncorrect = false;
+      self.currentAnswer = '';
+      self.correctAnswers = [];
+      self.incorrectAnswers = [];
+      self.quizScore = '';
+      self.rightAnswers = '';
+      self.wrongAnswers = '';
+    },
+    showIncorrect() {
+      // We need to keep the scope of the THIS keyword
+      var self = this;
+      self.viewIncorrect = true;
     }
   }
 });

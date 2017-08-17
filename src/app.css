@@ -74,11 +74,12 @@
   font-size: 14px;
   font-weight: 100;
 }
-.btn.quiz-btn.try-again {
+.btn.quiz-btn.try-again, .btn.quiz-btn.view-wrong {
   background: #FFF;
   color: #0099CC;
+  margin-right: 15px;
 }
-.btn.quiz-btn.try-again:hover {
+.btn.quiz-btn.try-again:hover, .btn.quiz-btn.view-wrong:hover {
   background: #00688B;
   color: #FFF;
   cursor: pointer;
@@ -87,7 +88,7 @@
   background: #0099CC;
   border: 2px solid #CCC;
   color: #FFF;
-  margin: 30px auto 0 auto;
+  margin: 30px auto 30px auto;
   padding: 15px;
   text-align: center;
   width: 30%;
@@ -99,6 +100,9 @@
 .score-percentage {
   font-size: 30px;
   font-weight: 100;
+}
+.incorrect-row {
+
 }
 .right-answers, .wrong-answers {
   font-size: 22px;
