@@ -11,20 +11,50 @@
     <div id="app" class="container">
       <h1 id="quiz_title">Javascript Quiz</h1>
       <template v-for="(question, index) in questionsList">
-        <h3>{{ question.question }}</h3>
+        <p class="question">{{question.id}}. {{ question.question }}</p>
         <div v-if="question.codeSnippet" class="code-review">
           <p v-for="code in question.codeSnippet">{{ code }}</p>
         </div>
         <div class="statement-container" v-for="option in question.options">
           <label class="statement-label" :for="option.id">
-            <input class="answer-input" type="checkbox" :name="option.id"/>
-            {{ option.statement }}
+            <input
+              class="answer-input"
+              :value="option.id"
+              v-model="currentAnswer"
+              type="radio"
+              :name="option.id"/>
+            <span class="option-statement">{{ option.statement }}</span>
           </label>
         </div>
-        <button @click="nextQuestion" class="btn btn-primary">{{ buttonText }}</button>
+        <div v-if="error" class="alert alert-danger" role="alert">
+          Please select at least 1 of the options above
+        </div>
+        <button @click="nextQuestion" class="btn quiz-btn">{{ buttonText }}</button>
       </template >
       <template v-if="submitted">
-        THIS IS THE QUIZ SCORE
+        <div class="row score-row">
+          <div class="col-12">
+            <p class="score-title">Your Score</p>
+          </div>
+          <div class="col-12">
+            <p class="score-percentage">{{ quizScore }}%</p>
+          </div>
+          <div class="col-12">
+            <p class="right-answers">
+              <span class="right-title"># of Right Answers: </span>
+              <span class="right-number">{{ rightAnswers }}</span>
+            </p>
+          </div>
+          <div class="col-12">
+            <p class="wrong-answers">
+              <span class="wrong-title"># of Wrong Answers: </span>
+              <span class="wrong-number">{{ wrongAnswers }}</span>
+            </p>
+          </div>
+          <div class="col-12">
+            <button class="btn quiz-btn try-again" @click="tryAgain">Try Again</button>
+          </div>
+        </div>
       </template>
     </div>
 
