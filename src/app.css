@@ -98,11 +98,24 @@
   font-weight: bold;
 }
 .score-percentage {
+  background: #FFF;
   font-size: 30px;
   font-weight: 100;
 }
-.incorrect-row {
-
+.score-percentage.ninety_onehundred {
+  color: #00FF00;
+}
+.score-percentage.eighty_eightyNine {
+  color: #006400;
+}
+.score-percentage.seventy_seventyNine {
+  color: #FFA500;
+}
+.score-percentage.sixty_sixtyNine {
+  color: #FF4500;
+}
+.score-percentage.fiftyNine_below {
+  color: #FF0000;
 }
 .right-answers, .wrong-answers {
   font-size: 22px;

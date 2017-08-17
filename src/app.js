@@ -129,10 +129,25 @@ export default StyleSheet.create({
         "fontWeight": "bold"
     },
     "score-percentage": {
+        "background": "#FFF",
         "fontSize": 30,
         "fontWeight": "100"
     },
-    "incorrect-row": {},
+    "score-percentageninety_onehundred": {
+        "color": "#00FF00"
+    },
+    "score-percentageeighty_eightyNine": {
+        "color": "#006400"
+    },
+    "score-percentageseventy_seventyNine": {
+        "color": "#FFA500"
+    },
+    "score-percentagesixty_sixtyNine": {
+        "color": "#FF4500"
+    },
+    "score-percentagefiftyNine_below": {
+        "color": "#FF0000"
+    },
     "right-answers": {
         "fontSize": 22,
         "fontWeight": "100"

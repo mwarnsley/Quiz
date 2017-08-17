@@ -8,60 +8,68 @@
   </head>
   <body>
 
-    <div id="app" class="container">
-      <h1 id="quiz_title">Javascript Quiz</h1>
-      <template v-for="question in questionsList">
-        <p class="question">{{question.id}}. {{ question.question }}</p>
-        <div v-if="question.codeSnippet" class="code-review">
-          <p v-for="code in question.codeSnippet">{{ code }}</p>
-        </div>
-        <div class="statement-container" v-for="option in question.options">
-          <label class="statement-label" :for="option.id">
-            <input
-              class="answer-input"
-              :value="option.id"
-              v-model="currentAnswer"
-              type="radio"
-              :name="option.id"/>
-            <span class="option-statement">{{ option.statement }}</span>
-          </label>
-        </div>
-        <div v-if="error" class="alert alert-danger" role="alert">
-          Please select at least 1 of the options above
-        </div>
-        <button @click="nextQuestion" class="btn quiz-btn">{{ buttonText }}</button>
-      </template >
-      <template v-if="submitted">
-        <div class="row score-row">
-          <div class="col-12">
-            <p class="score-title">Your Score</p>
+    <div id="app">
+      <div class="container-fluid">
+        <h1 id="quiz_title">Javascript Quiz</h1>
+      </div>
+      <div class="container">
+        <template v-for="question in questionsList">
+          <p class="question">{{question.id}}. {{ question.question }}</p>
+          <div v-if="question.codeSnippet" class="code-review">
+            <p v-for="code in question.codeSnippet">{{ code }}</p>
           </div>
-          <div class="col-12">
-            <p class="score-percentage">{{ quizScore }}%</p>
+          <div class="statement-container" v-for="option in question.options">
+            <label class="statement-label" :for="option.id">
+              <input
+                class="answer-input"
+                :value="option.id"
+                v-model="currentAnswer"
+                type="radio"
+                :name="option.id"/>
+              <span class="option-statement">{{ option.statement }}</span>
+            </label>
           </div>
-          <div class="col-12">
-            <p class="right-answers">
-              <span class="right-title"># of Right Answers: </span>
-              <span class="right-number">{{ rightAnswers }}</span>
-            </p>
+          <div v-if="error" class="alert alert-danger" role="alert">
+            Please select at least 1 of the options above
           </div>
-          <div class="col-12">
-            <p class="wrong-answers">
-              <span class="wrong-title"># of Wrong Answers: </span>
-              <span class="wrong-number">{{ wrongAnswers }}</span>
-            </p>
+          <button @click="nextQuestion" class="btn quiz-btn">{{ buttonText }}</button>
+        </template >
+        <template v-if="submitted">
+          <div class="row score-row">
+            <div class="col-12">
+              <p class="score-title">Your Score</p>
+            </div>
+            <div class="col-12">
+              <p
+                :class="{ ninety_onehundred: ninety_onehundred, eighty_eightyNine: eighty_eightyNine, seventy_seventyNine: seventy_seventyNine, sixty_sixtyNine: sixty_sixtyNine, fiftyNine_below: fiftyNine_below }"
+                class="score-percentage">{{ quizScore }}
+                %
+              </p>
+            </div>
+            <div class="col-12">
+              <p class="right-answers">
+                <span class="right-title"># of Right Answers: </span>
+                <span class="right-number">{{ rightAnswers }}</span>
+              </p>
+            </div>
+            <div class="col-12">
+              <p class="wrong-answers">
+                <span class="wrong-title"># of Wrong Answers: </span>
+                <span class="wrong-number">{{ wrongAnswers }}</span>
+              </p>
+            </div>
+            <div class="col-12">
+              <button v-if="viewIncorrectBtn" class="btn quiz-btn view-wrong" @click="showIncorrect">View Incorrect</button>
+              <button class="btn quiz-btn try-again" @click="tryAgain">Try Again</button>
+            </div>
           </div>
-          <div class="col-12">
-            <button v-if="viewIncorrectBtn" class="btn quiz-btn view-wrong" @click="showIncorrect">View Incorrect</button>
-            <button class="btn quiz-btn try-again" @click="tryAgain">Try Again</button>
+          <div v-if="viewIncorrect" class="row incorrect-row alert alert-danger" v-for="incorrect in incorrectAnswers">
+            <div class="col-12">
+              <p class="incorrect">{{ incorrect.id }}. {{ incorrect.question }}</p>
+            </div>
           </div>
-        </div>
-        <div v-if="viewIncorrect" class="row incorrect-row alert alert-danger" v-for="incorrect in incorrectAnswers">
-          <div class="col-12">
-            <p class="incorrect">{{ incorrect.id }}. {{ incorrect.question }}</p>
-          </div>
-        </div>
-      </template>
+        </template>
+      </div>
     </div>
 
     <script src="https://unpkg.com/vue"></script>
